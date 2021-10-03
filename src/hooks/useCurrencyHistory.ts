@@ -1,0 +1,52 @@
+import { format, subWeeks } from "date-fns";
+import { UserSerie } from "react-charts";
+import { useQuery } from "react-query";
+import { API_KEY } from "./useCurrency";
+
+type CurrencyValue = {
+  date: Date;
+  value: number;
+};
+
+type Series = {
+  label: string;
+  data: CurrencyValue[];
+};
+
+const historyKey = (ids: string[]) => ["currency_history"].concat(ids.sort());
+
+function useCurrencyHistory(ids: string[]) {
+  const { data: history = [], isLoading } = useQuery(historyKey(ids), () =>
+    fetchCurrencyHistory(ids)
+  );
+
+  return { isLoading, history };
+}
+
+async function fetchCurrencyHistory(ids: string[]) {
+  const query = ids.map((id) => `USD_${id}`).join(",");
+  const startDate = format(subWeeks(new Date(), 1), "yyyy-MM-dd");
+  const endDate = format(new Date(), "yyyy-MM-dd");
+  const response = await fetch(
+    `https://free.currconv.com/api/v7/convert?apiKey=${API_KEY}&q=${query}&compact=ultra&date=${startDate}&endDate=${endDate}`
+  );
+  const body = (await response.json()) as Record<
+    string,
+    Record<string, number>
+  >;
+  const data: UserSerie<CurrencyValue>[] = Object.entries(body).map(
+    ([key, val]) => ({
+      label: key,
+      data: Object.entries(val).map(([k, v]) => ({
+        date: new Date(k),
+        value: v,
+      })),
+    })
+  );
+
+  console.log(data);
+  return data;
+}
+
+export { useCurrencyHistory };
+export type { Series, CurrencyValue };
