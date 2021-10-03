@@ -1,14 +1,14 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
-import Backend from "i18next-xhr-backend";
+import HttpApi from "i18next-http-backend";
 
 i18n
-  .use(Backend)
+  .use(HttpApi)
   .use(initReactI18next)
   .init({
     debug: false,
-    lng: "us",
+    lng: getLanguageFromLocalStorage(),
     fallbackLng: ["us", "de"],
 
     interpolation: {
@@ -20,4 +20,14 @@ i18n
     },
   });
 
+function saveLanguageToLocalStorage(key: string) {
+  localStorage.setItem("language", key);
+}
+
+function getLanguageFromLocalStorage() {
+  return localStorage.getItem("language") ?? "us";
+}
+
 export default i18n;
+
+export { saveLanguageToLocalStorage };

@@ -1,8 +1,8 @@
 import Flag from "react-world-flags";
 import { useTranslation } from "react-i18next";
 import { Select, MenuItem, SelectChangeEvent } from "@mui/material";
-import Cookies from "js-cookie";
 import { styled } from "@mui/material/styles";
+import { saveLanguageToLocalStorage } from "../i18n";
 
 const StyledFlag = styled(Flag)({ height: 15 });
 
@@ -11,7 +11,7 @@ function LanguageSwapper() {
 
   const setLanguage = (e: SelectChangeEvent<string>) => {
     i18n.changeLanguage(e.target.value);
-    Cookies.set("lang", e.target.value);
+    saveLanguageToLocalStorage(e.target.value);
   };
 
   return (
