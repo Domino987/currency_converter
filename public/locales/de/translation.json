@@ -1,5 +1,6 @@
 {
   "app_title": "Währungsumrechner",
   "language": "Sprache",
-  "invalid_input": "Die Eingabe ist invalide"
+  "invalid_input": "Die Eingabe ist invalide",
+  "api_full": "Die Anzahl an freien Anfragen ist erreicht"
 }

@@ -36,15 +36,13 @@ async function fetchCurrencyHistory(ids: string[]) {
   >;
   const data: UserSerie<CurrencyValue>[] = Object.entries(body).map(
     ([key, val]) => ({
-      label: key,
+      label: key.split("_").join(" => "),
       data: Object.entries(val).map(([k, v]) => ({
         date: new Date(k),
         value: v,
       })),
     })
   );
-
-  console.log(data);
   return data;
 }
 

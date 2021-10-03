@@ -1,5 +1,6 @@
 import { Skeleton } from "@mui/material";
 import { Box } from "@mui/system";
+import { format } from "date-fns";
 import React from "react";
 import { AxisOptions, Chart } from "react-charts";
 import { useRecoilValue } from "recoil";
@@ -15,6 +16,10 @@ function CurrencyChart() {
   const primaryAxis = React.useMemo(
     (): AxisOptions<CurrencyValue> => ({
       getValue: (datum) => datum.date,
+      formatters: {
+        tooltip: (value: Date | null) => value?.toDateString(),
+        scale: (value: Date) => (value ? format(value, "d LLL") : ""),
+      },
     }),
     []
   );

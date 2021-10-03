@@ -9,7 +9,7 @@ const MY_GITHUB_PAGE = "https://github.com/Domino987";
 function Header() {
   const { t } = useTranslation();
   return (
-    <AppBar position="sticky" elevation={0}>
+    <AppBar position="sticky" elevation={0} sx={{ mb: 2 }}>
       <Toolbar sx={{ justifyContent: "end" }}>
         <Typography
           variant="h4"

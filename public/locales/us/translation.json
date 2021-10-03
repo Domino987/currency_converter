@@ -1,5 +1,6 @@
 {
   "app_title": "Currency Converter",
   "language": "Language",
-  "invalid_input": "The input is invalid"
+  "invalid_input": "The input is invalid",
+  "api_full": "The maximum amount of api calls is reached"
 }
