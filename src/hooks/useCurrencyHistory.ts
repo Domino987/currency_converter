@@ -16,8 +16,10 @@ type Series = {
 const historyKey = (ids: string[]) => ["currency_history"].concat(ids.sort());
 
 function useCurrencyHistory(ids: string[]) {
-  const { data: history = [], isLoading } = useQuery(historyKey(ids), () =>
-    fetchCurrencyHistory(ids)
+  const { data: history = [], isLoading } = useQuery(
+    historyKey(ids),
+    () => fetchCurrencyHistory(ids),
+    { enabled: ids.filter((x) => x !== "").length !== 0 }
   );
 
   return { isLoading, history };

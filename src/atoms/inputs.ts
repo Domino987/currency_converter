@@ -1,4 +1,4 @@
-import { atom, AtomEffect } from "recoil";
+import { atom, AtomEffect, useRecoilTransaction_UNSTABLE } from "recoil";
 
 const localStorageEffect: <T>(key: string) => AtomEffect<T> =
   (key) =>
@@ -12,22 +12,52 @@ const localStorageEffect: <T>(key: string) => AtomEffect<T> =
       localStorage.setItem(key, JSON.stringify(newValue));
     });
   };
-
+const currencyValues = atom({
+  key: "currencyValues",
+  default: { from: "", to: "" },
+});
 const leftInput = atom({
   key: "leftInput",
   default: "",
 });
 
-const fromCurrency = atom({
-  key: "fromCurrency",
-  default: "EUR",
-  effects_UNSTABLE: [localStorageEffect("fromCurrency")],
+const currencyHistory = atom<Array<{ from: string; to: string }>>({
+  key: "currencyHistory",
+  default: [],
+  effects_UNSTABLE: [localStorageEffect("currencyHistory")],
 });
 
-const toCurrency = atom({
-  key: "toCurrency",
-  default: "JPY",
-  effects_UNSTABLE: [localStorageEffect("toCurrency")],
-});
+function useSetCurrencies() {
+  const setCurrencies = useRecoilTransaction_UNSTABLE(
+    ({ get, set }) =>
+      ({ from, to }: { from?: string; to?: string }) => {
+        const values = get(currencyValues);
+        const nextValue = {
+          from: from ?? values.from,
+          to: to ?? values.to,
+        };
+        set(currencyValues, nextValue);
+        if (nextValue.from && nextValue.to) {
+          const prev = get(currencyHistory);
+          set(currencyHistory, (prev) =>
+            [nextValue].concat(
+              prev.filter(
+                ({ from: prevFrom, to: prevTo }) =>
+                  `${prevFrom}_${prevTo}` !==
+                  `${nextValue.from}_${nextValue.to}`
+              )
+            )
+          );
+        }
+      }
+  );
+  return setCurrencies;
+}
 
-export { leftInput, fromCurrency, toCurrency, localStorageEffect };
+export {
+  leftInput,
+  currencyValues,
+  currencyHistory,
+  useSetCurrencies,
+  localStorageEffect,
+};

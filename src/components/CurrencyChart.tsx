@@ -4,14 +4,13 @@ import { format } from "date-fns";
 import React from "react";
 import { AxisOptions, Chart } from "react-charts";
 import { useRecoilValue } from "recoil";
-import { fromCurrency, toCurrency } from "../atoms/inputs";
+import { currencyValues } from "../atoms/inputs";
 import { darkModeAtom } from "../atoms/theme";
 import { CurrencyValue, useCurrencyHistory } from "../hooks/useCurrencyHistory";
 
 function CurrencyChart() {
   const darkMode = useRecoilValue(darkModeAtom);
-  const from = useRecoilValue(fromCurrency);
-  const to = useRecoilValue(toCurrency);
+  const { from, to } = useRecoilValue(currencyValues);
   const { history } = useCurrencyHistory([from, to]);
   const primaryAxis = React.useMemo(
     (): AxisOptions<CurrencyValue> => ({

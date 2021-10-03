@@ -6,18 +6,19 @@ import {
   Box,
   TextFieldProps,
 } from "@mui/material";
-import { RecoilState, useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
+import { currencyValues, useSetCurrencies } from "../atoms/inputs";
 import { useAllCurrencies, useCurrencyState } from "../hooks/useAllCurrencies";
 
 type IProps = TextFieldProps & {
-  inputState: RecoilState<string>;
+  valueKey: "from" | "to";
 };
 
-function CurrencyInput({ inputState, ...props }: IProps) {
-  const [state, setState] = useRecoilState(inputState);
-  const currencyState = useCurrencyState(state);
+function CurrencyInput({ valueKey, ...props }: IProps) {
+  const state = useRecoilValue(currencyValues);
+  const currencyState = useCurrencyState(state[valueKey]);
   const { currencies, isLoading } = useAllCurrencies();
-
+  const setCurrencies = useSetCurrencies();
   return (
     <Box>
       <TextField
@@ -33,9 +34,9 @@ function CurrencyInput({ inputState, ...props }: IProps) {
       />
       <Select
         onChange={(e) => {
-          setState(e.target.value);
+          setCurrencies({ [valueKey]: e.target.value });
         }}
-        value={isLoading ? "" : state}
+        value={isLoading ? "" : state[valueKey]}
       >
         <MenuItem key="" value="">
           {""}

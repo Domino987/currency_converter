@@ -2,7 +2,7 @@ import SwapHorizIcon from "@mui/icons-material/SwapHorizontalCircle";
 import { IconButton } from "@mui/material";
 import React from "react";
 import { useRecoilState } from "recoil";
-import { fromCurrency, leftInput, toCurrency } from "../atoms/inputs";
+import { currencyValues, leftInput } from "../atoms/inputs";
 import { useCurrency } from "../hooks/useCurrency";
 
 const rotationStyles = {
@@ -17,12 +17,10 @@ const rotationStyles = {
 function CurrencySwapper() {
   const [rotated, setRotated] = React.useState(false);
   const [text, setText] = useRecoilState(leftInput);
-  const [from, setFrom] = useRecoilState(fromCurrency);
-  const [to, setTo] = useRecoilState(toCurrency);
+  const [{ from, to }, setValues] = useRecoilState(currencyValues);
   const { convertedValue } = useCurrency(from, to, text);
   const swapCurrencies = () => {
-    setFrom(to);
-    setTo(from);
+    setValues((prev) => ({ to: prev.from, from: prev.to }));
     setText(String(convertedValue));
     setRotated(true);
     setTimeout(() => {
