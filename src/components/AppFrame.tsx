@@ -20,7 +20,7 @@ function AppFrame({ children }: { children: JSX.Element[] | JSX.Element }) {
     if (devMode) {
       worker.start();
     }
-    queryClient.refetchQueries();
+    queryClient.refetchQueries({ inactive: false });
     return () => {
       if (devMode) {
         worker.stop();

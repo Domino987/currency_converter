@@ -10,5 +10,6 @@
   "go_to_github": "Go to Github Repo",
   "toggle_dev_mode": "Toggle Dev Mode",
   "dev_mode": "Dev Mode",
-  "prod_mode": "Prod Mode"
+  "prod_mode": "Prod Mode",
+  "alert_mode_notification": "Dev Mode active. Static values are being displayed"
 }
