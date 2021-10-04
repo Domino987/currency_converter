@@ -1,6 +1,7 @@
 import SwapHorizIcon from "@mui/icons-material/SwapHorizontalCircle";
-import { IconButton } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useRecoilState } from "recoil";
 import { currencyValues, leftInput } from "../atoms/inputs";
 import { useCurrency } from "../hooks/useCurrency";
@@ -15,6 +16,7 @@ const rotationStyles = {
 };
 
 function CurrencySwapper() {
+  const { t } = useTranslation();
   const [rotated, setRotated] = React.useState(false);
   const [text, setText] = useRecoilState(leftInput);
   const [{ from, to }, setValues] = useRecoilState(currencyValues);
@@ -28,12 +30,14 @@ function CurrencySwapper() {
     }, 200);
   };
   return (
-    <IconButton
-      onClick={swapCurrencies}
-      sx={rotated ? rotationStyles : undefined}
-    >
-      <SwapHorizIcon />
-    </IconButton>
+    <Tooltip title={t("swap_currencies") ?? ""}>
+      <IconButton
+        onClick={swapCurrencies}
+        sx={rotated ? rotationStyles : undefined}
+      >
+        <SwapHorizIcon />
+      </IconButton>
+    </Tooltip>
   );
 }
 

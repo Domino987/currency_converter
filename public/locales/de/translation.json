@@ -2,5 +2,10 @@
   "app_title": "Währungsumrechner",
   "language": "Sprache",
   "invalid_input": "Die Eingabe ist invalide",
-  "api_full": "Die Anzahl an freien Anfragen ist erreicht"
+  "api_full": "Die Anzahl an freien Anfragen ist erreicht",
+  "removeRecent": "{{name}} aus dem Schnellzugriff entfernen",
+  "swap_currencies": "Währungen tauschen",
+  "toggle_light": "Wechsel zu Light Mode",
+  "toggle_dark": "Wechsel zu Dark Mode",
+  "go_to_github": "Zum Github Repo"
 }

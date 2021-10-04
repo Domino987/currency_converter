@@ -2,5 +2,10 @@
   "app_title": "Currency Converter",
   "language": "Language",
   "invalid_input": "The input is invalid",
-  "api_full": "The maximum amount of api calls is reached"
+  "api_full": "The maximum amount of api calls is reached",
+  "removeRecent": "Remove {{name}} from quick access",
+  "swap_currencies": "Swap currencies",
+  "toggle_light": "Toggle to light mode",
+  "toggle_dark": "Toggle to dark mode",
+  "go_to_github": "Go to Github Repo"
 }

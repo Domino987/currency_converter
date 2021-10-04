@@ -1,4 +1,10 @@
-import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
+import {
+  AppBar,
+  IconButton,
+  Toolbar,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import { useTranslation } from "react-i18next";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { LanguageSwapper } from "./LanguageSwapper";
@@ -23,13 +29,15 @@ function Header() {
         </Typography>
         <LanguageSwapper />
         <ModeToggle />
-        <IconButton
-          onClick={() => {
-            window.location.href = MY_GITHUB_PAGE;
-          }}
-        >
-          <GitHubIcon />
-        </IconButton>
+        <Tooltip title={t("go_to_github") ?? ""}>
+          <IconButton
+            onClick={() => {
+              window.location.href = MY_GITHUB_PAGE;
+            }}
+          >
+            <GitHubIcon />
+          </IconButton>
+        </Tooltip>
       </Toolbar>
     </AppBar>
   );
