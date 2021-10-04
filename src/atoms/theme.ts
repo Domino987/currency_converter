@@ -7,4 +7,10 @@ const darkModeAtom = atom<"dark" | "light">({
   effects_UNSTABLE: [localStorageEffect<"dark" | "light">("dark_mode")],
 });
 
-export { darkModeAtom };
+const devModeAtom = atom({
+  key: "dev_mode",
+  default: false,
+  effects_UNSTABLE: [localStorageEffect<boolean>("dev_mode")],
+});
+
+export { darkModeAtom, devModeAtom };

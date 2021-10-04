@@ -1,5 +1,7 @@
 import { useQuery } from "react-query";
 
+type IConvertResponse = Record<string, { val: number }>;
+
 const currencyKey = (from: string, to: string) => ["currency", from, to];
 
 function useCurrency(from: string, to: string, amount: string) {
@@ -22,8 +24,9 @@ async function fetchCurrency(from: string, to: string) {
   const response = await fetch(
     `https://free.currconv.com/api/v7/convert?q=${converterKey}&compact=y&apiKey=${API_KEY}`
   );
-  const body = (await response.json()) as Record<string, { val: number }>;
+  const body = (await response.json()) as IConvertResponse;
   return body[converterKey].val;
 }
 
 export { useCurrency, API_KEY };
+export type { IConvertResponse };

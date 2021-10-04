@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { LanguageSwapper } from "./LanguageSwapper";
 import { ModeToggle } from "./ModeToggle";
+import { DevModeSwapper } from "./DevModeSwapper";
 
 const MY_GITHUB_PAGE = "https://github.com/Domino987";
 
@@ -27,6 +28,7 @@ function Header() {
         >
           {t("app_title")}
         </Typography>
+        <DevModeSwapper />
         <LanguageSwapper />
         <ModeToggle />
         <Tooltip title={t("go_to_github") ?? ""}>

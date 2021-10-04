@@ -7,5 +7,8 @@
   "swap_currencies": "Währungen tauschen",
   "toggle_light": "Wechsel zu Light Mode",
   "toggle_dark": "Wechsel zu Dark Mode",
-  "go_to_github": "Zum Github Repo"
+  "go_to_github": "Zum Github Repo",
+  "toggle_dev_mode": "Wechsel zum Dev Modus",
+  "dev_mode": "Dev Mode",
+  "prod_mode": "Prod Mode"
 }

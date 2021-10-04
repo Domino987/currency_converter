@@ -3,6 +3,8 @@ import { UserSerie } from "react-charts";
 import { useQuery } from "react-query";
 import { API_KEY } from "./useCurrency";
 
+type HistoryResponse = Record<string, Record<string, number>>;
+
 type CurrencyValue = {
   date: Date;
   value: number;
@@ -32,10 +34,7 @@ async function fetchCurrencyHistory(ids: string[]) {
   const response = await fetch(
     `https://free.currconv.com/api/v7/convert?apiKey=${API_KEY}&q=${query}&compact=ultra&date=${startDate}&endDate=${endDate}`
   );
-  const body = (await response.json()) as Record<
-    string,
-    Record<string, number>
-  >;
+  const body = (await response.json()) as HistoryResponse;
   const data: UserSerie<CurrencyValue>[] = Object.entries(body).map(
     ([key, val]) => ({
       label: key.split("_").join(" => "),
@@ -49,4 +48,4 @@ async function fetchCurrencyHistory(ids: string[]) {
 }
 
 export { useCurrencyHistory };
-export type { Series, CurrencyValue };
+export type { Series, CurrencyValue, HistoryResponse };
