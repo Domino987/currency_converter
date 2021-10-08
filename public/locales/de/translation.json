@@ -11,5 +11,6 @@
   "toggle_dev_mode": "Wechsel zum Dev Modus",
   "dev_mode": "Dev Mode",
   "prod_mode": "Prod Mode",
-  "alert_mode_notification": "Dev Mode aktiv. Statische Werte werden angezeigt"
+  "alert_mode_notification": "Dev Mode aktiv. Statische Werte werden angezeigt",
+  "last_updated": "Zuletzt aktualisiert"
 }

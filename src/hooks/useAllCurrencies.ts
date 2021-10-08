@@ -8,11 +8,12 @@ interface IAllCurrencyResponse {
   >;
 }
 function useAllCurrencies() {
-  const { data: currencies = {}, isLoading } = useQuery(
-    "allCurrencies",
-    fetchCurrencies
-  );
-  return { isLoading, currencies };
+  const {
+    data: currencies = {},
+    isLoading,
+    isSuccess,
+  } = useQuery("allCurrencies", fetchCurrencies);
+  return { isLoading, currencies, isSuccess };
 }
 
 function useCurrencyState(id: string) {

@@ -38,9 +38,9 @@ function CurrencyInput({ valueKey, ...props }: IProps) {
         }}
         value={isLoading ? "" : state[valueKey]}
       >
-        {isLoading ? (
-          <MenuItem key="" value="">
-            {""}
+        {isLoading && currencyState !== undefined ? (
+          <MenuItem key="" value={currencyState.id}>
+            {currencyState.currencyName}
           </MenuItem>
         ) : null}
         {Object.values(currencies).map((curr) => (

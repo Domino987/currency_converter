@@ -1,6 +1,7 @@
 import { format, subWeeks } from "date-fns";
 import { UserSerie } from "react-charts";
 import { useQuery } from "react-query";
+import { useAllCurrencies } from "./useAllCurrencies";
 import { API_KEY } from "./useCurrency";
 
 type HistoryResponse = Record<string, Record<string, number>>;
@@ -18,10 +19,11 @@ type Series = {
 const historyKey = (ids: string[]) => ["currency_history"].concat(ids.sort());
 
 function useCurrencyHistory(ids: string[]) {
+  const { isSuccess } = useAllCurrencies();
   const { data: history = [], isLoading } = useQuery(
     historyKey(ids),
     () => fetchCurrencyHistory(ids),
-    { enabled: ids.filter((x) => x !== "").length !== 0 }
+    { enabled: ids.filter((x) => x !== "").length !== 0 && isSuccess }
   );
 
   return { isLoading, history };

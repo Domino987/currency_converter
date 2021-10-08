@@ -1,18 +1,13 @@
 import { Stack } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { currencyValues, leftInput } from "../atoms/inputs";
-import { useCurrency } from "../hooks/useCurrency";
+import { useCurrentlyEnteredValues } from "../hooks/useCurrency";
 import { CurrencyInput } from "./CurrencyInput";
 import { CurrencySwapper } from "./CurrencySwapper";
 
 function Inputs() {
   const { t } = useTranslation();
-  const { from, to } = useRecoilValue(currencyValues);
-  const [text, setText] = useRecoilState(leftInput);
-  const { convertedValue } = useCurrency(from, to, text);
-
-  const isInvalidInput = isNaN(Number(text));
+  const { text, setText, convertedValue, isInvalidInput } =
+    useCurrentlyEnteredValues();
   return (
     <Stack
       spacing={2}
@@ -24,7 +19,7 @@ function Inputs() {
       <CurrencyInput
         value={text}
         valueKey="from"
-        onChange={(e) => setText(e.target.value)}
+        onChange={(e) => setText(e.target.value.substring(0, 9))}
         error={isInvalidInput}
         helperText={isInvalidInput ? t("invalid_input") : ""}
       />

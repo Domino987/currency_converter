@@ -9,7 +9,7 @@ const darkModeAtom = atom<"dark" | "light">({
 
 const devModeAtom = atom({
   key: "dev_mode",
-  default: false,
+  default: JSON.parse(localStorage.getItem("dev_mode") ?? "false"),
   effects_UNSTABLE: [localStorageEffect<boolean>("dev_mode")],
 });
 

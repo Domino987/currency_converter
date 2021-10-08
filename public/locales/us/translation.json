@@ -11,5 +11,6 @@
   "toggle_dev_mode": "Toggle Dev Mode",
   "dev_mode": "Dev Mode",
   "prod_mode": "Prod Mode",
-  "alert_mode_notification": "Dev Mode active. Static values are being displayed"
+  "alert_mode_notification": "Dev Mode active. Static values are being displayed",
+  "last_updated": "Last updated"
 }

@@ -15,6 +15,7 @@ const localStorageEffect: <T>(key: string) => AtomEffect<T> =
 const currencyValues = atom({
   key: "currencyValues",
   default: { from: "", to: "" },
+  effects_UNSTABLE: [localStorageEffect("currencyValues")],
 });
 const leftInput = atom({
   key: "leftInput",
