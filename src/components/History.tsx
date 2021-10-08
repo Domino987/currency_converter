@@ -6,18 +6,14 @@ import {
   ListItemText,
   Paper,
   Tooltip,
-  Typography,
 } from "@mui/material";
 import { useRecoilState } from "recoil";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { currencyHistory, useSetCurrencies } from "../atoms/inputs";
 import { useTranslation } from "react-i18next";
-import { useCurrentlyEnteredValues } from "../hooks/useCurrency";
-import { formatDistanceToNow } from "date-fns";
 
 function History() {
   const { t } = useTranslation();
-  const { dataUpdatedAt } = useCurrentlyEnteredValues();
   const [history, setHistory] = useRecoilState(currencyHistory);
   const setCurrencies = useSetCurrencies();
 
@@ -32,12 +28,6 @@ function History() {
 
   return (
     <>
-      {dataUpdatedAt ? (
-        <Typography sx={{ float: "right", m: 3 }}>
-          {t("last_updated")}{" "}
-          {formatDistanceToNow(dataUpdatedAt, { addSuffix: true })}
-        </Typography>
-      ) : null}
       <List
         sx={{
           mt: 8,

@@ -1,4 +1,5 @@
 import { Stack } from "@mui/material";
+import { formatDistanceToNow } from "date-fns";
 import { useTranslation } from "react-i18next";
 import { useCurrentlyEnteredValues } from "../hooks/useCurrency";
 import { CurrencyInput } from "./CurrencyInput";
@@ -8,6 +9,12 @@ function Inputs() {
   const { t } = useTranslation();
   const { text, setText, convertedValue, isInvalidInput } =
     useCurrentlyEnteredValues();
+
+  const { dataUpdatedAt } = useCurrentlyEnteredValues();
+
+  const updatedAtText = `${t("last_updated")} 
+  ${formatDistanceToNow(dataUpdatedAt, { addSuffix: true })}`;
+
   return (
     <Stack
       spacing={2}
@@ -24,7 +31,12 @@ function Inputs() {
         helperText={isInvalidInput ? t("invalid_input") : ""}
       />
       <CurrencySwapper />
-      <CurrencyInput value={convertedValue} valueKey="to" disabled={true} />
+      <CurrencyInput
+        helperText={updatedAtText}
+        value={convertedValue}
+        valueKey="to"
+        disabled={true}
+      />
     </Stack>
   );
 }
