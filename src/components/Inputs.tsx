@@ -11,9 +11,11 @@ function Inputs() {
     useCurrentlyEnteredValues();
 
   const { dataUpdatedAt } = useCurrentlyEnteredValues();
-
-  const updatedAtText = `${t("last_updated")} 
-  ${formatDistanceToNow(dataUpdatedAt, { addSuffix: true })}`;
+  const updatedAtText =
+    dataUpdatedAt !== 0
+      ? `${t("last_updated")} 
+  ${formatDistanceToNow(dataUpdatedAt, { addSuffix: true })}`
+      : "";
 
   return (
     <Stack
