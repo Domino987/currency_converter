@@ -38,15 +38,19 @@ export const handlers = [
     if (hasTimeFrame) {
       return res(
         ctx.status(200),
-        ctx.json<HistoryResponse>({
-          [convert]: Array.from(Array(10)).reduce<Record<string, number>>(
-            (obj, x, i) => {
-              obj[addDays(new Date(0), i).toString()] = i + 1;
-              return obj;
-            },
-            {}
-          ),
-        })
+        ctx.json<HistoryResponse>(
+          convert.split(",").reduce<HistoryResponse>((agg, key) => {
+            agg[key] = Array.from(Array(10)).reduce<Record<string, number>>(
+              (obj, x, i) => {
+                obj[addDays(new Date(0), i).toString()] =
+                  i + Math.random() * 10;
+                return obj;
+              },
+              {}
+            );
+            return agg;
+          }, {})
+        )
       );
     }
     return res(

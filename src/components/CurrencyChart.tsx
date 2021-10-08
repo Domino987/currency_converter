@@ -7,7 +7,12 @@ import { useRecoilValue } from "recoil";
 import { currencyValues } from "../atoms/inputs";
 import { darkModeAtom } from "../atoms/theme";
 import { CurrencyValue, useCurrencyHistory } from "../hooks/useCurrencyHistory";
-
+/**
+ * Displays a chart to show the development of the two selected currencies.
+ * Listens to the currently selected currencies to update the history if the change via recoil
+ *
+ * @return {JSX.Element} The currency chart
+ */
 function CurrencyChart() {
   const darkMode = useRecoilValue(darkModeAtom);
   const { from, to } = useRecoilValue(currencyValues);

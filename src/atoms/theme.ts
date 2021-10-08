@@ -6,10 +6,12 @@ const darkModeAtom = atom<"dark" | "light">({
   default: "dark",
   effects_UNSTABLE: [localStorageEffect<"dark" | "light">("dark_mode")],
 });
-
 const devModeAtom = atom({
   key: "dev_mode",
-  default: JSON.parse(localStorage.getItem("dev_mode") ?? "false"),
+  default:
+    process.env.NODE_ENV === "test"
+      ? false
+      : JSON.parse(localStorage.getItem("dev_mode") ?? "false"),
   effects_UNSTABLE: [localStorageEffect<boolean>("dev_mode")],
 });
 

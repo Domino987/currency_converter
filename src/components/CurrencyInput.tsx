@@ -17,13 +17,14 @@ type IProps = TextFieldProps & {
 function CurrencyInput({ valueKey, ...props }: IProps) {
   const state = useRecoilValue(currencyValues);
   const currencyState = useCurrencyState(state[valueKey]);
-  const { currencies, isLoading } = useAllCurrencies();
+  const { currencies, isLoading, isError } = useAllCurrencies();
   const setCurrencies = useSetCurrencies();
+  console.log(state, isLoading);
   return (
     <Box>
       <TextField
-        type="number"
         {...props}
+        type="number"
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -38,11 +39,14 @@ function CurrencyInput({ valueKey, ...props }: IProps) {
         }}
         value={isLoading ? "" : state[valueKey]}
       >
-        {isLoading && currencyState !== undefined ? (
-          <MenuItem key="" value={currencyState.id}>
-            {currencyState.currencyName}
-          </MenuItem>
-        ) : null}
+        {(isLoading && state !== undefined) || isError
+          ? [
+              <MenuItem key={state[valueKey]} value={state[valueKey]}>
+                {state[valueKey]}
+              </MenuItem>,
+              <MenuItem key="" value={""} />,
+            ]
+          : null}
         {Object.values(currencies).map((curr) => (
           <MenuItem key={curr.id} value={curr.id}>
             {curr.currencyName}{" "}

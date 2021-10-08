@@ -11,9 +11,10 @@ function useAllCurrencies() {
   const {
     data: currencies = {},
     isLoading,
+    isError,
     isSuccess,
   } = useQuery("allCurrencies", fetchCurrencies);
-  return { isLoading, currencies, isSuccess };
+  return { isLoading, currencies, isError, isSuccess };
 }
 
 function useCurrencyState(id: string) {

@@ -21,11 +21,11 @@ i18n
   });
 
 function saveLanguageToLocalStorage(key: string) {
-  localStorage.setItem("language", key);
+  localStorage && localStorage.setItem("language", key);
 }
 
 function getLanguageFromLocalStorage() {
-  return localStorage.getItem("language") ?? "us";
+  return localStorage ? localStorage.getItem("language") ?? "us" : "us";
 }
 
 export default i18n;

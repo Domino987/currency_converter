@@ -3,6 +3,9 @@ import { atom, AtomEffect, useRecoilTransaction_UNSTABLE } from "recoil";
 const localStorageEffect: <T>(key: string) => AtomEffect<T> =
   (key) =>
   ({ setSelf, onSet }) => {
+    if (!localStorage) {
+      return undefined;
+    }
     const savedValue = localStorage.getItem(key);
     if (savedValue != null) {
       setSelf(JSON.parse(savedValue));
