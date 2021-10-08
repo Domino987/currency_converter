@@ -11,7 +11,7 @@ import { LanguageSwapper } from "../LanguageSwapper";
 import { ModeToggle } from "../ModeToggle";
 import { DevModeSwapper } from "../DevModeSwapper";
 
-const MY_GITHUB_PAGE = "https://github.com/Domino987";
+const MY_GITHUB_PAGE = "https://github.com/Domino987/currency_converter";
 
 /**
  * Renders the app header bar.
