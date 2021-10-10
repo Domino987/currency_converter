@@ -47,12 +47,14 @@ function CurrencyInput({ valueKey, ...props }: IProps) {
               <MenuItem key="" value={""} />,
             ]
           : null}
-        {Object.values(currencies).map((curr) => (
-          <MenuItem key={curr.id} value={curr.id}>
-            {curr.currencyName}{" "}
-            {curr.currencySymbol ? `(${curr.currencySymbol})` : ""}
-          </MenuItem>
-        ))}
+        {Object.values(currencies)
+          .sort((a, b) => a.currencyName.localeCompare(b.currencyName))
+          .map((curr) => (
+            <MenuItem key={curr.id} value={curr.id}>
+              {curr.currencyName}{" "}
+              {curr.currencySymbol ? `(${curr.currencySymbol})` : ""}
+            </MenuItem>
+          ))}
       </Select>
     </Box>
   );
